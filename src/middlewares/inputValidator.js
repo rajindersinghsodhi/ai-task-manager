@@ -5,7 +5,6 @@ const inputValidator = (schema) => (req, res, next) => {
         if (!response.success) {
             const errors = response.error.issues.map(issue => {
                 const field = issue.path[0];
-                console.log(issue)
                 let message = issue.message;
 
                 return { field, message };
