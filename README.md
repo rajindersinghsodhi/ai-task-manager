@@ -36,6 +36,38 @@ Before running this project, make sure you have the following installed:
     ALLOWED_ORIGINS=["http://localhost:3000"]
    ```
 
+## How to Get a Groq API Key
+
+Follow these steps to obtain your free Groq API key:
+
+### Step 1: Create a Groq Account
+1. Go to [https://console.groq.com/](https://console.groq.com/)
+2. Click on **"Sign Up"** or **"Get Started"**
+3. Complete the account creation process
+
+### Step 3: Access the API Keys Section
+1. Once logged in, you'll be redirected to the Groq Playground page
+2. Look for **"API Keys"** in the top right section of navbar
+3. Click on **"API Keys"**
+
+### Step 4: Create a New API Key
+1. Click the **"Create API Key"** button
+2. Give your API key a name (e.g., "Task Manager App")
+3. Click **"Submit"**
+
+### Step 5: Copy Your API Key
+1. Your API key will be displayed **only once**
+2. Click the **"Copy"** button to copy it to your clipboard
+3. **IMPORTANT**: Save this key somewhere safe - you won't be able to see it again!
+
+### Step 6: Add to Your Project
+1. Open your `.env` file in the project root
+2. Replace `PLEASE_ENTER_YOUR_API_KEY_HERE` with your actual API key:
+   ```env
+   GROQ_API_KEY=gsk_your_actual_api_key_here
+   ```
+3. Save the file
+
 ## Installation
 
 Install all project dependencies:
