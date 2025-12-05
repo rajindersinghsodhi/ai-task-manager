@@ -17,6 +17,24 @@ const createTask = async (req, res) => {
     }
 }
 
+const getTasks = async (req, res) => {
+  try {
+    const { tasksTodo, tasksDone } = await taskService.getTasks();
+
+    res.status(200).json({
+        status: "success",
+        message: "task fetched successfully",
+        tasksTodo, 
+        tasksDone
+    });
+  } catch (error) {
+    res.status(500).json({
+        status: "error",
+        message: error.message,
+    });
+  }
+};
+
 const getTask = async (req, res) => {
   try {
     const { taskId } = req.params;
@@ -73,4 +91,25 @@ const deleteTask = async (req, res) => {
   }
 };
 
-export { createTask, getTask, updateTask, deleteTask };
+const parseSpeechToTask = async (req, res) => {
+    try {
+        const { speechText } = req.body;
+
+        console.log(speechText)
+
+        const taskPayload = await taskService.parseSpeechText(speechText); 
+
+        return res.status(200).json({
+          status: "success",
+          message: "speech text parsed successfully",
+          taskPayload
+        });      
+    } catch (error) {
+        res.status(500).json({
+            status: "error",
+            message: error.message
+        });
+    }
+}
+
+export { createTask, getTasks, getTask, updateTask, deleteTask, parseSpeechToTask };

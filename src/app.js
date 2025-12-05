@@ -1,8 +1,12 @@
 import express from "express";
+import cors from "cors";
 import { taskRoutes } from "./routes/task.js";
 
 const app = express();
 
+app.use(cors({
+  origin: ["http://localhost:3000"]
+}))
 app.use(express.json());
 
 app.get("/", (req, res) => {
