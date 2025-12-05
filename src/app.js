@@ -1,11 +1,12 @@
 import express from "express";
 import cors from "cors";
 import { taskRoutes } from "./routes/task.js";
+import { ALLOWED_ORIGINS } from "./config/env.js";
 
 const app = express();
 
 app.use(cors({
-  origin: ["http://localhost:3000"]
+  origin: ALLOWED_ORIGINS
 }))
 app.use(express.json());
 
