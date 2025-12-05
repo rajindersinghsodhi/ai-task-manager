@@ -29,11 +29,11 @@ Before running this project, make sure you have the following installed:
    ```
 
 2. **Create a `.env` file** in the root directory and add the following environment variables:
-   ```env
-   PORT=8000
-DB_URL=mongodb+srv://rajsodhisocial_db_user:NazOlblPmZLnTqcs@cluster0.euuxfny.mongodb.net/ai-task-manager?appName=Cluster0
-GROQ_API_KEY=PLEASE_ENTER_YOUR_API_KEY_HERE
-ALLOWED_ORIGINS=["http://localhost:3000"]
+   ```bash
+    PORT=8000
+    DB_URL=mongodb+srv://rajsodhisocial_db_user:NazOlblPmZLnTqcs@cluster0.euuxfny.mongodb.net/ai-task-manager?appName=Cluster0
+    GROQ_API_KEY=PLEASE_ENTER_YOUR_API_KEY_HERE
+    ALLOWED_ORIGINS=["http://localhost:3000"]
    ```
 
 ## Installation
