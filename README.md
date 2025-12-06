@@ -22,7 +22,7 @@ Before running this project, make sure you have the following installed:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/rajindersinghsodhi/ai-task-manager.git
+   git clone https://github.com/rajindersinghsodhi/voice-enabled-task-tracker-be.git
    cd voice-enabled-task-tracker-be
    ```
 2. **Open folder in any IDE**
