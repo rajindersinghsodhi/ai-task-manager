@@ -1,8 +1,8 @@
 import Groq from "groq-sdk";
-import { GROQ } from "../../config/env.js";
+import { GROQ_API_KEY } from "../../config/env.js";
 import taskSchema from "../../schemas/taskSchema.js";
 
-const groq = new Groq({ apiKey: GROQ });
+const groq = new Groq({ apiKey: GROQ_API_KEY });
 
 const validateTaskSchema = (task) => {
     try {
