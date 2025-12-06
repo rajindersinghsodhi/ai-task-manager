@@ -6,7 +6,7 @@ const createTask = async (req, res) => {
 
         return res.status(200).json({
             status: "success",
-            message: "created task successfully",
+            message: "task created successfully",
             task
         });
     } catch (error) {
@@ -23,7 +23,7 @@ const getTasks = async (req, res) => {
 
     res.status(200).json({
         status: "success",
-        message: "task fetched successfully",
+        message: "tasks fetched successfully",
         tasksTodo, 
         tasksDone
     });

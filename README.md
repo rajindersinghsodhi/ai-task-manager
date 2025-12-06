@@ -7,10 +7,8 @@ A RESTful API backend for the Voice Enabled Task Tracker application built with 
 - RESTful API endpoints for task management (CRUD operations)
 - AI-powered voice input processing to generate task information from user speech text
 - Task status management (ToDo, Done)
-- Priority levels (Low, Medium, High)
+- Priority levels (Low, High)
 - Due date tracking
-- CORS enabled for frontend integration
-- MongoDB database integration
 
 ## Prerequisites
 
@@ -27,13 +25,14 @@ Before running this project, make sure you have the following installed:
    git clone https://github.com/rajindersinghsodhi/ai-task-manager.git
    cd ai-task-manager
    ```
+2. **Open folder in any IDE**
 
-2. **Create a `.env` file** in the root directory and add the following environment variables:
+3. **Create a `.env` file** in the root directory and add the following environment variables:
    ```bash
     PORT=8000
     DB_URL=mongodb+srv://rajsodhisocial_db_user:NazOlblPmZLnTqcs@cluster0.euuxfny.mongodb.net/ai-task-manager?appName=Cluster0
     GROQ_API_KEY=PLEASE_ENTER_YOUR_API_KEY_HERE
-    ALLOWED_ORIGINS=["http://localhost:3000"]
+    ALLOWED_ORIGINS=http://localhost:3000
    ```
 
 ## How to Get a Groq API Key
@@ -46,12 +45,12 @@ Follow these steps to obtain your free Groq API key:
 3. Complete the account creation process
 
 ### Step 3: Access the API Keys Section
-1. Once logged in, you'll be redirected to the Groq Playground page
+1. Once logged in, you'll be redirected to the Groq console
 2. Look for **"API Keys"** in the top right section of navbar
 3. Click on **"API Keys"**
 
 ### Step 4: Create a New API Key
-1. Click the **"Create API Key"** button
+1. Click **"Create API Key"** button
 2. Give your API key a name (e.g., "Task Manager App")
 3. Click **"Submit"**
 
@@ -119,7 +118,8 @@ npm start
 The backend is configured to accept requests from:
 - `http://localhost:3000` (default frontend URL)
 
-If your frontend runs on a different port, update the url in your `.env` file in `ALLOWED_ORIGINS` array.
+If your frontend runs on a different port, update the url in your `.env` file as:
+- `ALLOWED_ORIGINS=http://localhost:3000,YOUR_FRONTEND_URL`.
 
 ## Important Notes
 
