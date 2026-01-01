@@ -1,6 +1,6 @@
 import taskService from "../../services/taskService.js";
 
-const createTask = async (req, res) => {
+const createTask = async (req, res, next) => {
     try {
         const userId = req.user.userId;
         const task = await taskService.createTask({ userId, ...req.body });
@@ -15,7 +15,7 @@ const createTask = async (req, res) => {
     }
 }
 
-const getTasks = async (req, res) => {
+const getTasks = async (req, res, next) => {
   try {
     const userId = req.user.userId;
     const { tasksTodo, tasksDone } = await taskService.getTasks(userId);
@@ -31,7 +31,7 @@ const getTasks = async (req, res) => {
   }
 };
 
-const getTask = async (req, res) => {
+const getTask = async (req, res, next) => {
   try {
     const userId = req.user.userId;
     const { taskId } = req.params;
@@ -48,7 +48,7 @@ const getTask = async (req, res) => {
   }
 };
 
-const updateTask = async (req, res) => {
+const updateTask = async (req, res, next) => {
   try {
     const userId = req.user.userId;
     const { taskId, updates } = req.body;
@@ -65,7 +65,7 @@ const updateTask = async (req, res) => {
   }
 };
 
-const deleteTask = async (req, res) => {
+const deleteTask = async (req, res, next) => {
   try {
     const userId = req.user.userId;
     const { taskId } = req.params;
@@ -81,7 +81,7 @@ const deleteTask = async (req, res) => {
   }
 };
 
-const parseSpeechToTask = async (req, res) => {
+const parseSpeechToTask = async (req, res, next) => {
     try {
         const userId = req.user.userId;
         const { speechText } = req.body;

@@ -36,13 +36,15 @@ const generateTaskObject = async (userCommand) => {
 
                         {
                             "title": string,
+                            "description: string,
                             "priority": "low" | "high",
                             "dueDate": "YYYY-MM-DD"
                         }
 
                         Rules:
                         - Always return ONLY a raw JSON object (no markdown, no quotes, no explanations).
-                        - The title must be a short clear task description.
+                        - The title must be a short.
+                        - Description should be based on user input and descriptive.
                         - Priority must be inferred from words:
                         - "urgent", "important", "asap" → "high"
                         - "whenever", "optional", "later" → "low"
