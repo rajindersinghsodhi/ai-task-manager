@@ -1,8 +1,13 @@
 import Groq from "groq-sdk";
 import { GROQ_API_KEY } from "../../config/env.js";
 import taskSchema from "../../schemas/taskSchema.js";
+import { ApiError } from "../../utils/ApiError.js";
 
-const groq = new Groq({ apiKey: GROQ_API_KEY });
+let groq = null;
+
+if(GROQ_API_KEY){
+    groq = new Groq({ apiKey: GROQ_API_KEY });
+}
 
 const validateTaskSchema = (task) => {
     try {
@@ -14,9 +19,11 @@ const validateTaskSchema = (task) => {
 
 const generateTaskObject = async (userCommand) => {
     try {
+        if(!groq){
+            throw new ApiError(500, "groq api key not provided, ai feature disabled");
+        }
         const currentDateTime = new Date();
 
-        console.log(userCommand)
         const structuredResponse = await groq.chat.completions.create({
             model: "llama-3.1-8b-instant",
             messages: [
@@ -60,8 +67,6 @@ const generateTaskObject = async (userCommand) => {
         const cleanJson = jsonString.replace(/```json/g, "").replace(/```/g, "").trim();
 
         const taskData = JSON.parse(cleanJson);
-
-        console.log(taskData)
 
         validateTaskSchema(taskData);
 

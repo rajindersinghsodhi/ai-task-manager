@@ -1,14 +1,18 @@
 import express from "express";
 import cors from "cors";
-import { taskRoutes } from "./routes/task.js";
+import { taskRoutes } from "./routes/v1/task.js";
 import { ALLOWED_ORIGINS } from "./config/env.js";
+import authenticationRoutes from "./routes/v1/authentication.js";
+import cookieParser from "cookie-parser";
 
 const app = express();
 
 app.use(cors({
-  origin: ALLOWED_ORIGINS
+  origin: 'http://localhost:3000',
+  credentials: true
 }))
 app.use(express.json());
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
     res.status(200).json({
@@ -28,5 +32,6 @@ app.get("/health", (req, res) => {
 });
 
 app.use("/api/v1/tasks", taskRoutes);
+app.use("/api/v1/auth", authenticationRoutes);
 
 export default app;

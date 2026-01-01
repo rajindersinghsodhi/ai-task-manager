@@ -1,8 +1,9 @@
-import taskService from "../services/taskService.js";
+import taskService from "../../services/taskService.js";
 
 const createTask = async (req, res) => {
     try {
-        const task = await taskService.createTask(req.body);
+        const userId = req.user.userId;
+        const task = await taskService.createTask({ userId, ...req.body });
 
         return res.status(200).json({
             status: "success",
@@ -10,16 +11,14 @@ const createTask = async (req, res) => {
             task
         });
     } catch (error) {
-        res.status(500).json({
-            status: "error",
-            message: error.message,
-        });
+        next(error);
     }
 }
 
 const getTasks = async (req, res) => {
   try {
-    const { tasksTodo, tasksDone } = await taskService.getTasks();
+    const userId = req.user.userId;
+    const { tasksTodo, tasksDone } = await taskService.getTasks(userId);
 
     res.status(200).json({
         status: "success",
@@ -28,18 +27,16 @@ const getTasks = async (req, res) => {
         tasksDone
     });
   } catch (error) {
-    res.status(500).json({
-        status: "error",
-        message: error.message,
-    });
+    next(error);
   }
 };
 
 const getTask = async (req, res) => {
   try {
+    const userId = req.user.userId;
     const { taskId } = req.params;
 
-    const task = await taskService.getTask(taskId);
+    const task = await taskService.getTask({ userId, taskId });
 
     res.status(200).json({
         status: "success",
@@ -47,18 +44,16 @@ const getTask = async (req, res) => {
         task
     });
   } catch (error) {
-    res.status(500).json({
-        status: "error",
-        message: error.message,
-    });
+    next(error);
   }
 };
 
 const updateTask = async (req, res) => {
   try {
-    const { taskId } = req.params;
+    const userId = req.user.userId;
+    const { taskId, updates } = req.body;
 
-    const task = await taskService.updateTask(taskId, req.body);
+    const task = await taskService.updateTask({ userId, taskId, updates });
 
     res.status(200).json({
         status: "success",
@@ -66,36 +61,30 @@ const updateTask = async (req, res) => {
         task
     });
   } catch (error) {
-    res.status(500).json({
-        status: "error",
-        message: error.message,
-    });
+    next(error);
   }
 };
 
 const deleteTask = async (req, res) => {
   try {
+    const userId = req.user.userId;
     const { taskId } = req.params;
 
-    await taskService.deleteTask(taskId);
+    await taskService.deleteTask({ userId, taskId });
 
     res.status(200).json({
         status: "success",
         message: "task deleted successfully",
     });
   } catch (error) {
-    res.status(500).json({
-        status: "error",
-        message: error.message,
-    });
+    next(error);
   }
 };
 
 const parseSpeechToTask = async (req, res) => {
     try {
+        const userId = req.user.userId;
         const { speechText } = req.body;
-
-        console.log(speechText)
 
         const taskPayload = await taskService.parseSpeechText(speechText); 
 
@@ -105,10 +94,7 @@ const parseSpeechToTask = async (req, res) => {
           taskPayload
         });      
     } catch (error) {
-        res.status(500).json({
-            status: "error",
-            message: error.message
-        });
+        next(error);
     }
 }
 

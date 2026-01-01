@@ -2,21 +2,21 @@ import Task from "../models/task.js";
 import { generateUniqueId } from "../utils/generateUniqueId.js";
 import taskParserService from "./ai/speechParser.js";
 
-const createTask = async ({ title, priority, dueDate }) => {
+const createTask = async ({ userId, title, description, priority, dueDate }) => {
     try {
         const taskId = await generateUniqueId(Task, "taskId");
 
-        const task = await Task.create({ taskId, title, priority, dueDate });
-
+        const task = await Task.create({ userId, taskId, title, description, priority, dueDate });
+        
         return task;
     } catch (error) {
         throw error;
     }
 }
 
-const getTasks = async () => {
+const getTasks = async (userId) => {
   try {
-    const tasks = await Task.find();
+    const tasks = await Task.find({ userId });
 
     if(tasks.length === 0){
         throw new Error("Task not found");
@@ -31,9 +31,9 @@ const getTasks = async () => {
   }
 }
 
-const getTask = async (taskId) => {
+const getTask = async ({ userId, taskId }) => {
   try {
-    const task = await Task.findOne({ taskId });
+    const task = await Task.findOne({ userId, taskId });
 
     if(!task){
         throw new Error("Task not found");
@@ -45,13 +45,13 @@ const getTask = async (taskId) => {
   }
 }
 
-const updateTask = async (taskId, updates) => {
+const updateTask = async ({ userId, taskId, updates }) => {
   try {
     if(!Object.keys(updates).length) {
         throw new Error("no fields provided to update");
     }
 
-    const task = await Task.findOneAndUpdate({ taskId }, { $set: updates }, { new: true });
+    const task = await Task.findOneAndUpdate({ userId, taskId }, { $set: updates }, { new: true });
 
     if(!task) {
         throw new Error("Task not found");
@@ -63,9 +63,9 @@ const updateTask = async (taskId, updates) => {
   }
 };
 
-const deleteTask = async (taskId) => {
+const deleteTask = async ({ userId, taskId }) => {
   try {
-    const res = await Task.deleteOne({ taskId });
+    const res = await Task.deleteOne({ userId, taskId });
 
     if (res.deletedCount === 0) {
       throw new Error("task not found");
